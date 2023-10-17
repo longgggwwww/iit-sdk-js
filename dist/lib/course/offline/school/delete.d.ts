@@ -1,11 +1,4 @@
-import { Prisma } from "@prisma/client";
-export declare function findMany(params: {
-    skip?: number;
-    take?: number;
-    cursor?: Prisma.SchoolWhereUniqueInput;
-    where?: Prisma.SchoolWhereInput;
-    orderBy?: Prisma.SchoolOrderByWithRelationInput;
-}): Promise<import("axios").AxiosResponse<({
+export declare function deleteOne(id: number): Promise<import("axios").AxiosResponse<{
     grades: ({
         classes: {
             id: number;
@@ -29,4 +22,4 @@ export declare function findMany(params: {
     logo: string | null;
     createdAt: Date;
     updatedAt: Date;
-})[]>>;
+}>>;

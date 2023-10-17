@@ -17,3 +17,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./create"), exports);
 __exportStar(require("./find-many"), exports);
 __exportStar(require("./find-uniq"), exports);
+__exportStar(require("./update"), exports);
+__exportStar(require("./delete"), exports);
+__exportStar(require("./delete-many"), exports);

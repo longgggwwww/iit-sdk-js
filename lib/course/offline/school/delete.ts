@@ -2,13 +2,7 @@ import axios from "axios";
 import { Prisma } from "@prisma/client";
 import { server } from "..";
 
-export function findMany(params: {
-  skip?: number;
-  take?: number;
-  cursor?: Prisma.SchoolWhereUniqueInput;
-  where?: Prisma.SchoolWhereInput;
-  orderBy?: Prisma.SchoolOrderByWithRelationInput;
-}) {
+export function deleteOne(id: number) {
   const schoolPopulated = Prisma.validator<Prisma.SchoolDefaultArgs>()({
     include: {
       grades: {
@@ -19,5 +13,5 @@ export function findMany(params: {
     },
   });
   type SchoolData = Prisma.SchoolGetPayload<typeof schoolPopulated>;
-  return axios.get<SchoolData[]>(`${server}/api/schools`, { params });
+  return axios.delete<SchoolData>(`${server}/api/schools/${id}`);
 }
