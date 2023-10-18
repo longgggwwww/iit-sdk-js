@@ -2,20 +2,18 @@ import axios, { AxiosError } from "axios";
 import { Prisma } from "@prisma/client";
 import { server } from "..";
 
-export async function create(data: Prisma.SchoolCreateInput) {
-  const populated = Prisma.validator<Prisma.SchoolDefaultArgs>()({
+export async function create(data: Prisma.GradeCreateInput) {
+  const populated = Prisma.validator<Prisma.GradeDefaultArgs>()({
     include: {
-      grades: {
-        include: {
-          classes: true,
-        },
-      },
+      school: true,
+      subjects: true,
+      classes: true,
     },
   });
-  type Data = Prisma.SchoolGetPayload<typeof populated>;
+  type Data = Prisma.GradeGetPayload<typeof populated>;
 
   try {
-    const result = await axios.post<Data>(`${server}/api/schools`, data);
+    const result = await axios.post<Data>(`${server}/api/grades`, data);
     return {
       status: result.status,
       data: result.data,
