@@ -5,23 +5,21 @@ import { server } from "..";
 export async function findMany(params: {
   skip?: number;
   take?: number;
-  cursor?: Prisma.SchoolWhereUniqueInput;
-  where?: Prisma.SchoolWhereInput;
-  orderBy?: Prisma.SchoolOrderByWithRelationInput;
+  cursor?: Prisma.GradeWhereUniqueInput;
+  where?: Prisma.GradeWhereInput;
+  orderBy?: Prisma.GradeOrderByWithRelationInput;
 }) {
-  const populated = Prisma.validator<Prisma.SchoolDefaultArgs>()({
+  const populated = Prisma.validator<Prisma.GradeDefaultArgs>()({
     include: {
-      grades: {
-        include: {
-          classes: true,
-        },
-      },
+      school: true,
+      subjects: true,
+      classes: true,
     },
   });
-  type Data = Prisma.SchoolGetPayload<typeof populated>;
+  type Data = Prisma.GradeGetPayload<typeof populated>;
 
   try {
-    const res = await axios.get<Data>(`${server}/api/schools`, { params });
+    const res = await axios.get<Data>(`${server}/api/grades`, { params });
     return {
       status: res.status,
       data: res.data,

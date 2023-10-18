@@ -15,10 +15,10 @@ export async function create(data: Prisma.SchoolCreateInput) {
   type Data = Prisma.SchoolGetPayload<typeof populated>;
 
   try {
-    const result = await axios.post<Data>(`${server}/api/schools`, data);
+    const res = await axios.post<Data>(`${server}/api/schools`, data);
     return {
-      status: result.status,
-      data: result.data,
+      status: res.status,
+      data: res.data,
     };
   } catch (err) {
     const axiosErr = err as AxiosError;

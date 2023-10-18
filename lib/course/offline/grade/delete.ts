@@ -3,19 +3,17 @@ import { Prisma } from "@prisma/client";
 import { server } from "..";
 
 export async function deleteOne(id: number) {
-  const populated = Prisma.validator<Prisma.SchoolDefaultArgs>()({
+  const populated = Prisma.validator<Prisma.GradeDefaultArgs>()({
     include: {
-      grades: {
-        include: {
-          classes: true,
-        },
-      },
+      school: true,
+      subjects: true,
+      classes: true,
     },
   });
-  type Data = Prisma.SchoolGetPayload<typeof populated>;
+  type Data = Prisma.GradeGetPayload<typeof populated>;
 
   try {
-    const res = await axios.delete<Data>(`${server}/api/schools/${id}`);
+    const res = await axios.delete<Data>(`${server}/api/grades/${id}`);
     return {
       status: res.status,
       data: res.data,
@@ -25,7 +23,7 @@ export async function deleteOne(id: number) {
     const axiosErr = err as AxiosError;
     switch (axiosErr.response?.status) {
       case 404:
-        message = "Không tìm thấy trường học";
+        message = "Không tìm thấy khối lớp";
         break;
     }
     return {

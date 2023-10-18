@@ -13,17 +13,17 @@ export async function create(data: Prisma.GradeCreateInput) {
   type Data = Prisma.GradeGetPayload<typeof populated>;
 
   try {
-    const result = await axios.post<Data>(`${server}/api/grades`, data);
+    const res = await axios.post<Data>(`${server}/api/grades`, data);
     return {
-      status: result.status,
-      data: result.data,
+      status: res.status,
+      data: res.data,
     };
   } catch (err) {
     const axiosErr = err as AxiosError;
     let message: string = "Lỗi không xác định";
     switch (axiosErr.response?.status) {
       case 409:
-        message = "Mã trường học đã tồn tại";
+        message = "Nhãn khối lớp đã tồn tại";
         break;
     }
 
