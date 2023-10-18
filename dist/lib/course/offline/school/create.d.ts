@@ -1,21 +1,13 @@
 import { Prisma } from "@prisma/client";
-export declare function create(data: Prisma.SchoolCreateInput): Promise<import("axios").AxiosResponse<{
-    grades: ({
-        classes: {
-            id: number;
-            name: string;
-            yearId: number;
-            gradeId: number;
-        }[];
-    } & {
-        id: number;
-        name: string;
-        description: string | null;
-        schoolId: number;
-        createdAt: Date;
-        updatedAt: Date;
-    })[];
-} & {
+type MyResponse<T> = {
+    status: number;
+    data?: T;
+    err?: {
+        message: string;
+        detail?: string;
+    };
+};
+export declare function create(data: Prisma.SchoolCreateInput): Promise<MyResponse<{
     id: number;
     code: string;
     name: string;
@@ -24,3 +16,4 @@ export declare function create(data: Prisma.SchoolCreateInput): Promise<import("
     createdAt: Date;
     updatedAt: Date;
 }>>;
+export {};
