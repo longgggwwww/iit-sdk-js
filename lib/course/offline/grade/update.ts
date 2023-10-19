@@ -1,32 +1,31 @@
 import axios, { AxiosError } from "axios";
 import { Prisma } from "@prisma/client";
 import { server } from "..";
-import { Grade } from "../../../../types";
+import { Grade, Response } from "../../../../types";
 
-export async function update(id: string, data: Prisma.GradeUpdateInput) {
+export async function update(
+  id: string,
+  data: Prisma.GradeUpdateInput
+): Promise<Response<Grade>> {
   try {
-    const url = `${server}/api/grades/${id}`;
-    const res = await axios.patch<Grade>(url, data);
-    return {
-      status: res.status,
-      data: res.data,
-    };
+    return await axios.patch(`${server}/api/grades/${id}`, data);
   } catch (err) {
-    const axiosErr = err as AxiosError;
-    let message = "Lỗi không xác định";
-    switch (axiosErr.response?.status) {
-      case 404:
-        message = "Không tìm thấy khối lớp";
-        break;
-      case 409:
-        message = "Nhãn khối lớp bị trùng";
-        break;
-    }
+    const { response } = <AxiosError>err;
+    const msg = (status?: number) => {
+      switch (status) {
+        case 404:
+          return "Không tìm thấy khối lớp";
+        case 409:
+          return "Nhãn khối lớp bị trùng";
+        default:
+          return "Có lỗi xảy ra";
+      }
+    };
     return {
-      status: axiosErr.response?.status,
+      status: response?.status,
       err: {
-        message,
-        detail: axiosErr.response?.data.message,
+        message: msg(response?.status),
+        detail: response?.data.message,
       },
     };
   }

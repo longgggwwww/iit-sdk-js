@@ -1,38 +1,28 @@
 import axios, { AxiosError } from "axios";
 import { Prisma } from "@prisma/client";
 import { server } from "..";
+import { Response, School } from "../../../../types";
 
-export async function create(data: Prisma.SchoolCreateInput) {
-  const populated = Prisma.validator<Prisma.SchoolDefaultArgs>()({
-    include: {
-      grades: {
-        include: {
-          classes: true,
-        },
-      },
-    },
-  });
-  type Data = Prisma.SchoolGetPayload<typeof populated>;
-
+export async function create(
+  data: Prisma.SchoolCreateInput
+): Promise<Response<School>> {
   try {
-    const res = await axios.post<Data>(`${server}/api/schools`, data);
-    return {
-      status: res.status,
-      data: res.data,
-    };
+    return await axios.post(`${server}/api/schools`, data);
   } catch (err) {
-    const axiosErr = err as AxiosError;
-    let message = "Lỗi không xác định";
-    switch (axiosErr.response?.status) {
-      case 409:
-        message = "Mã trường học đã tồn tại";
-        break;
-    }
+    const { response } = <AxiosError>err;
+    const msg = (status?: number) => {
+      switch (status) {
+        case 409:
+          return "Mã trường học đã tồn tại";
+        default:
+          return "Có lỗi xảy ra";
+      }
+    };
     return {
-      status: axiosErr.response!.status,
+      status: response!.status,
       err: {
-        message,
-        detail: axiosErr.response?.data.message,
+        message: msg(response?.status),
+        detail: response?.data.message,
       },
     };
   }

@@ -1,28 +1,25 @@
 import axios, { AxiosError } from "axios";
 import { server } from "..";
-import { School } from "../../../../types";
+import { Response, School } from "../../../../types";
 
-export async function deleteOne(id: number) {
+export async function deleteOne(id: number): Promise<Response<School>> {
   try {
-    const url = `${server}/api/schools/${id}`;
-    const res = await axios.delete<School>(url);
-    return {
-      status: res.status,
-      data: res.data,
-    };
+    return await axios.delete(`${server}/api/schools/${id}`);
   } catch (err) {
-    const axiosErr = err as AxiosError;
-    let message = "Lỗi không xác định";
-    switch (axiosErr.response?.status) {
-      case 404:
-        message = "Không tìm thấy trường học";
-        break;
-    }
+    const { response } = <AxiosError>err;
+    const msg = (status?: number) => {
+      switch (status) {
+        case 404:
+          return "Không tìm thấy trường";
+        default:
+          return "Có lỗi xảy ra";
+      }
+    };
     return {
-      status: axiosErr.response?.status,
+      status: response?.status,
       err: {
-        message,
-        detail: axiosErr.response?.data.message,
+        message: msg(response?.status),
+        detail: response?.data.message,
       },
     };
   }

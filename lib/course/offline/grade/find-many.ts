@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
-import { Prisma } from "@prisma/client";
+import { Grade, Prisma } from "@prisma/client";
 import { server } from "..";
-import { Grade, Response } from "../../../../types";
+import { Response } from "../../../../types";
 
 export async function findMany(params: {
   skip?: number;
@@ -9,22 +9,23 @@ export async function findMany(params: {
   cursor?: Prisma.GradeWhereUniqueInput;
   where?: Prisma.GradeWhereInput;
   orderBy?: Prisma.GradeOrderByWithRelationInput;
-}) {
+}): Promise<Response<Grade[]>> {
   try {
-    const url = `${server}/api/grades`;
-    const res = await axios.get<Grade[]>(url, { params });
-    return {
-      status: res.status,
-      data: res.data,
-    } as Response<Grade[]>;
+    return await axios.get(`${server}/api/grades`, { params });
   } catch (err) {
-    const axiosErr = err as AxiosError;
+    const { response } = <AxiosError>err;
+    const msg = (status?: number) => {
+      switch (status) {
+        default:
+          return "Có lỗi xảy ra";
+      }
+    };
     return {
-      status: axiosErr.response?.status,
+      status: response?.status,
       err: {
-        message: "Lỗi không xác định",
-        detail: axiosErr.response?.data.message,
+        message: msg(response?.status),
+        detail: response?.data.message,
       },
-    } as Response<Grade[]>;
+    };
   }
 }

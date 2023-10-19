@@ -1,30 +1,30 @@
 import axios, { AxiosError } from "axios";
 import { Prisma } from "@prisma/client";
 import { server } from "..";
-import { Grade } from "../../../../types";
+import { Grade, Response } from "../../../../types";
 
-export async function create(data: Prisma.GradeCreateInput) {
+export async function create(
+  data: Prisma.GradeCreateInput
+): Promise<Response<Grade>> {
   try {
-    const url = `${server}/api/grades`;
-    const res = await axios.post<Grade>(url, data);
-    return {
-      status: res.status,
-      data: res.data,
-    };
+    return await axios.post(`${server}/api/grades`, data);
   } catch (err) {
-    const axiosErr = err as AxiosError;
-    let message = "Lỗi không xác định";
-    switch (axiosErr.response?.status) {
-      case 409:
-        message = "Nhãn khối lớp đã tồn tại";
-        break;
-    }
-
+    const { response } = <AxiosError>err;
+    const msg = (status?: number) => {
+      switch (status) {
+        case 404:
+          return "Không tìm thấy trường học";
+        case 409:
+          return "Nhãn khối lớp đã tồn tại";
+        default:
+          return "Có lỗi xảy ra";
+      }
+    };
     return {
-      status: axiosErr.response!.status,
+      status: response?.status,
       err: {
-        message,
-        detail: axiosErr.response?.data.message,
+        message: msg(response?.status),
+        detail: response?.data.message,
       },
     };
   }

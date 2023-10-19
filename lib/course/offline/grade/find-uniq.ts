@@ -1,28 +1,25 @@
 import axios, { AxiosError } from "axios";
 import { server } from "..";
-import { Grade } from "../../../../types";
+import { Grade, Response } from "../../../../types";
 
-export async function findUniq(id: number) {
+export async function findUniq(id: number): Promise<Response<Grade>> {
   try {
-    const url = `${server}/api/grades/${id}`;
-    const res = await axios.get<Grade>(url);
-    return {
-      status: res.status,
-      data: res.data,
-    };
+    return await axios.get(`${server}/api/grades/${id}`);
   } catch (err) {
-    const axiosErr = err as AxiosError;
-    let message = "Lỗi không xác định";
-    switch (axiosErr.response?.status) {
-      case 404:
-        message = "Không tìm thấy khối lớp";
-        break;
-    }
+    const { response } = <AxiosError>err;
+    const msg = (status?: number) => {
+      switch (status) {
+        case 404:
+          return "Không tìm thấy khối lớp";
+        default:
+          return "Có lỗi xảy ra";
+      }
+    };
     return {
-      status: axiosErr.response?.status,
+      status: response?.status,
       err: {
-        message,
-        detail: axiosErr.response?.data.message,
+        message: msg(response?.status),
+        detail: response?.data.message,
       },
     };
   }
