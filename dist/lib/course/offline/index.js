@@ -23,9 +23,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connect = exports.server = exports.grade = exports.school = void 0;
+exports.connect = exports.server = exports.school = void 0;
 exports.school = __importStar(require("./school"));
-exports.grade = __importStar(require("./grade"));
+// export * as grade from "./grade";
 exports.server = "prod.db";
 function connect(url) {
     if (url) {

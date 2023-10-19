@@ -9,22 +9,23 @@ export async function findMany(params: {
   cursor?: Prisma.SchoolWhereUniqueInput;
   where?: Prisma.SchoolWhereInput;
   orderBy?: Prisma.SchoolOrderByWithRelationInput;
-}) {
+}): Promise<Response<School[]>> {
   try {
-    const url = `${server}/api/schools`;
-    const res = await axios.get<School[]>(url, { params });
-    return {
-      status: res.status,
-      data: res.data,
-    } as Response<School[]>;
+    return await axios.get(`${server}/api/schools`, { params });
   } catch (err) {
-    const axiosErr = err as AxiosError;
+    const { response } = <AxiosError>err;
+    const msg = (status?: number) => {
+      switch (status) {
+        default:
+          return "Có lỗi xảy ra";
+      }
+    };
     return {
-      status: axiosErr.response?.status,
+      status: response?.status,
       err: {
-        message: "Lỗi không xác định",
-        detail: axiosErr.response?.data.message,
+        message: msg(response?.status),
+        detail: response?.data.message,
       },
-    } as Response<School[]>;
+    };
   }
 }

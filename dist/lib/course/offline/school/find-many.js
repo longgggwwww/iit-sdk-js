@@ -7,22 +7,22 @@ exports.findMany = void 0;
 const axios_1 = __importDefault(require("axios"));
 const __1 = require("..");
 async function findMany(params) {
-    var _a, _b;
     try {
-        const url = `${__1.server}/api/schools`;
-        const res = await axios_1.default.get(url, { params });
-        return {
-            status: res.status,
-            data: res.data,
-        };
+        return await axios_1.default.get(`${__1.server}/api/schools`, { params });
     }
     catch (err) {
-        const axiosErr = err;
+        const { response } = err;
+        const msg = (status) => {
+            switch (status) {
+                default:
+                    return "Có lỗi xảy ra";
+            }
+        };
         return {
-            status: (_a = axiosErr.response) === null || _a === void 0 ? void 0 : _a.status,
+            status: response === null || response === void 0 ? void 0 : response.status,
             err: {
-                message: "Lỗi không xác định",
-                detail: (_b = axiosErr.response) === null || _b === void 0 ? void 0 : _b.data.message,
+                message: msg(response === null || response === void 0 ? void 0 : response.status),
+                detail: response === null || response === void 0 ? void 0 : response.data.message,
             },
         };
     }
