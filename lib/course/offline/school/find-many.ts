@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { Prisma } from "@prisma/client";
 import { server } from "..";
-import { School } from "../../../../types";
+import { Response, School } from "../../../../types";
 
 export async function findMany(params: {
   skip?: number;
@@ -16,7 +16,7 @@ export async function findMany(params: {
     return {
       status: res.status,
       data: res.data,
-    };
+    } as Response<School[]>;
   } catch (err) {
     const axiosErr = err as AxiosError;
     return {
@@ -25,6 +25,6 @@ export async function findMany(params: {
         message: "Lỗi không xác định",
         detail: axiosErr.response?.data.message,
       },
-    };
+    } as Response<School[]>;
   }
 }
