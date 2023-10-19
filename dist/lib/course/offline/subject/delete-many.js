@@ -9,7 +9,8 @@ const __1 = require("..");
 async function deleteMany(ids) {
     var _a, _b;
     try {
-        const res = await axios_1.default.delete(`${__1.server}/api/subjects/batch`, {
+        const url = `${__1.server}/api/subjects/batch`;
+        const res = await axios_1.default.delete(url, {
             data: { ids },
         });
         return {

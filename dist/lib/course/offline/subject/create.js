@@ -5,22 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create = void 0;
 const axios_1 = __importDefault(require("axios"));
-const client_1 = require("@prisma/client");
 const __1 = require("..");
-const populated = client_1.Prisma.validator()({
-    include: {
-        grade: true,
-        topics: {
-            include: {
-                category: true,
-            },
-        },
-    },
-});
 async function create(data) {
     var _a, _b;
     try {
-        const res = await axios_1.default.post(`${__1.server}/api/subjects`, data);
+        const url = `${__1.server}/api/subjects`;
+        const res = await axios_1.default.post(url, data);
         return {
             status: res.status,
             data: res.data,

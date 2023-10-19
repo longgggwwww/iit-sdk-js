@@ -5,21 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.findUniq = void 0;
 const axios_1 = __importDefault(require("axios"));
-const client_1 = require("@prisma/client");
 const __1 = require("..");
 async function findUniq(id) {
     var _a, _b, _c;
-    const populated = client_1.Prisma.validator()({
-        include: {
-            grades: {
-                include: {
-                    classes: true,
-                },
-            },
-        },
-    });
     try {
-        const res = await axios_1.default.get(`${__1.server}/api/schools/${id}`);
+        const url = `${__1.server}/api/schools/${id}`;
+        const res = await axios_1.default.get(url);
         return {
             status: res.status,
             data: res.data,
