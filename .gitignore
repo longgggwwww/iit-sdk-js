@@ -1,0 +1,8 @@
+# Folders
+node_modules
+prisma
+
+# Files
+*.env
+*.db
+*.db-journal
