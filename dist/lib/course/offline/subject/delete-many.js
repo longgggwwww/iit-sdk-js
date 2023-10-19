@@ -3,14 +3,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findMany = void 0;
+exports.deleteMany = void 0;
 const axios_1 = __importDefault(require("axios"));
 const __1 = require("..");
-async function findMany(params) {
+async function deleteMany(ids) {
     var _a, _b;
     try {
-        const url = `${__1.server}/api/schools`;
-        const res = await axios_1.default.get(url, { params });
+        const res = await axios_1.default.delete(`${__1.server}/api/subjects/batch`, {
+            data: { ids },
+        });
         return {
             status: res.status,
             data: res.data,
@@ -27,4 +28,4 @@ async function findMany(params) {
         };
     }
 }
-exports.findMany = findMany;
+exports.deleteMany = deleteMany;

@@ -3,7 +3,8 @@ import { server } from "..";
 
 export async function deleteMany(ids: number[]) {
   try {
-    const res = await axios.delete(`${server}/api/schools/batch`, {
+    const url = `${server}/api/schools/batch`;
+    const res = await axios.delete(url, {
       data: { ids },
     });
     return {

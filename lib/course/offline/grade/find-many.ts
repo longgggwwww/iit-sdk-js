@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { Prisma } from "@prisma/client";
 import { server } from "..";
+import { Grade } from "../../../../types";
 
 export async function findMany(params: {
   skip?: number;
@@ -9,17 +10,9 @@ export async function findMany(params: {
   where?: Prisma.GradeWhereInput;
   orderBy?: Prisma.GradeOrderByWithRelationInput;
 }) {
-  const populated = Prisma.validator<Prisma.GradeDefaultArgs>()({
-    include: {
-      school: true,
-      subjects: true,
-      classes: true,
-    },
-  });
-  type Data = Prisma.GradeGetPayload<typeof populated>;
-
   try {
-    const res = await axios.get<Data>(`${server}/api/grades`, { params });
+    const url = `${server}/api/grades`;
+    const res = await axios.get<Grade[]>(url, { params });
     return {
       status: res.status,
       data: res.data,

@@ -1,44 +1,40 @@
 import { Prisma } from "@prisma/client";
-export declare function findMany(params: {
-    skip?: number;
-    take?: number;
-    cursor?: Prisma.GradeWhereUniqueInput;
-    where?: Prisma.GradeWhereInput;
-    orderBy?: Prisma.GradeOrderByWithRelationInput;
-}): Promise<{
+export declare function update(id: string, data: Prisma.SubjectUpdateInput): Promise<{
     status: number;
-    data: ({
-        classes: {
+    data: {
+        grade: {
             id: number;
-            name: string;
-            yearId: number;
-            gradeId: number;
-        }[];
-        school: {
-            id: number;
-            code: string;
-            name: string;
+            label: number;
             description: string | null;
-            logo: string | null;
+            schoolId: number;
             createdAt: Date;
             updatedAt: Date;
         };
-        subjects: {
+        topics: ({
+            category: {
+                id: number;
+                name: string;
+                description: string | null;
+                createdAt: Date;
+                updatedAt: Date;
+            };
+        } & {
             id: number;
             name: string;
             description: string | null;
-            gradeId: number;
+            subjectId: number;
+            categoryId: number;
             createdAt: Date;
             updatedAt: Date;
-        }[];
+        })[];
     } & {
         id: number;
-        label: number;
+        name: string;
         description: string | null;
-        schoolId: number;
+        gradeId: number;
         createdAt: Date;
         updatedAt: Date;
-    })[];
+    };
     err?: undefined;
 } | {
     status: number | undefined;

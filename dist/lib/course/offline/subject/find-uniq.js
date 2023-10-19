@@ -11,13 +11,16 @@ async function findUniq(id) {
     var _a, _b, _c;
     const populated = client_1.Prisma.validator()({
         include: {
-            school: true,
-            subjects: true,
-            classes: true,
+            grade: true,
+            topics: {
+                include: {
+                    category: true,
+                },
+            },
         },
     });
     try {
-        const res = await axios_1.default.get(`${__1.server}/api/grades/${id}`);
+        const res = await axios_1.default.get(`${__1.server}/api/subjects/${id}`);
         return {
             status: res.status,
             data: res.data,
@@ -28,7 +31,7 @@ async function findUniq(id) {
         let message = "Lỗi không xác định";
         switch ((_a = axiosErr.response) === null || _a === void 0 ? void 0 : _a.status) {
             case 404:
-                message = "Không tìm thấy khối lớp";
+                message = "Không tìm thấy môn học";
                 break;
         }
         return {

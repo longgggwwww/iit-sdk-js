@@ -26,8 +26,8 @@ async function findUniq(id) {
         };
     }
     catch (err) {
-        let message = "Lỗi không xác định";
         const axiosErr = err;
+        let message = "Lỗi không xác định";
         switch ((_a = axiosErr.response) === null || _a === void 0 ? void 0 : _a.status) {
             case 404:
                 message = "Không tìm thấy trường học";

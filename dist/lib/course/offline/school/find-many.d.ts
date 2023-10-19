@@ -7,7 +7,7 @@ export declare function findMany(params: {
     orderBy?: Prisma.SchoolOrderByWithRelationInput;
 }): Promise<{
     status: number;
-    data: {
+    data: ({
         grades: ({
             classes: {
                 id: number;
@@ -31,7 +31,7 @@ export declare function findMany(params: {
         logo: string | null;
         createdAt: Date;
         updatedAt: Date;
-    };
+    })[];
     err?: undefined;
 } | {
     status: number | undefined;

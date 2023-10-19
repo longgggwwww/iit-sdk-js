@@ -5,15 +5,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.findMany = void 0;
 const axios_1 = __importDefault(require("axios"));
+const client_1 = require("@prisma/client");
 const __1 = require("..");
+const subjectPopulated = client_1.Prisma.validator()({
+    include: {
+        grade: true,
+        topics: {
+            include: {
+                category: true,
+            },
+        },
+    },
+});
 async function findMany(params) {
     var _a, _b;
     try {
-        const url = `${__1.server}/api/schools`;
-        const res = await axios_1.default.get(url, { params });
+        const response = await axios_1.default.get(`${__1.server}/api/subjects`, {
+            params,
+        });
         return {
-            status: res.status,
-            data: res.data,
+            status: response.status,
+            data: response.data,
         };
     }
     catch (err) {

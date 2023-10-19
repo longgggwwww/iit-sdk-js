@@ -1,28 +1,18 @@
 import axios, { AxiosError } from "axios";
-import { Prisma } from "@prisma/client";
 import { server } from "..";
+import { School } from "../../../../types";
 
 export async function deleteOne(id: number) {
-  const populated = Prisma.validator<Prisma.SchoolDefaultArgs>()({
-    include: {
-      grades: {
-        include: {
-          classes: true,
-        },
-      },
-    },
-  });
-  type Data = Prisma.SchoolGetPayload<typeof populated>;
-
   try {
-    const res = await axios.delete<Data>(`${server}/api/schools/${id}`);
+    const url = `${server}/api/schools/${id}`;
+    const res = await axios.delete<School>(url);
     return {
       status: res.status,
       data: res.data,
     };
   } catch (err) {
-    let message: string = "Lỗi không xác định";
     const axiosErr = err as AxiosError;
+    let message = "Lỗi không xác định";
     switch (axiosErr.response?.status) {
       case 404:
         message = "Không tìm thấy trường học";
