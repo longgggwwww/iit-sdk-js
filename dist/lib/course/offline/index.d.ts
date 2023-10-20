@@ -4,6 +4,8 @@ export * as subject from "./subject";
 export * as year from "./year";
 export * as class from "./class";
 export * as category from "./category";
+export * as bookseries from "./bookseries";
 export * as topic from "./topic";
+export * as document from "./document";
 export declare let server: string;
 export declare function connect(url?: string): void;
