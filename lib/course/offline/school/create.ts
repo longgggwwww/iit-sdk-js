@@ -19,7 +19,7 @@ export async function create(
       }
     };
     return {
-      status: response!.status,
+      status: response?.status,
       err: {
         message: msg(response?.status),
         detail: response?.data.message,

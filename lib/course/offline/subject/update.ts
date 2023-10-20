@@ -1,29 +1,29 @@
 import axios, { AxiosError } from "axios";
 import { Prisma } from "@prisma/client";
 import { server } from "..";
-import { Subject } from "../../../../types";
+import { Response, Subject } from "../../../../types";
 
-export async function update(id: string, data: Prisma.SubjectUpdateInput) {
+export async function update(
+  id: string,
+  data: Prisma.SubjectUpdateInput
+): Promise<Response<Subject>> {
   try {
-    const url = `${server}/api/subjects/${id}`;
-    const res = await axios.patch<Subject>(url, data);
-    return {
-      status: res.status,
-      data: res.data,
-    };
+    return await axios.patch(`${server}/api/subjects/${id}`, data);
   } catch (err) {
-    let message: string = "Lỗi không xác định";
-    const axiosErr = err as AxiosError;
-    switch (axiosErr.response?.status) {
-      case 404:
-        message = "Không tìm thấy môn học";
-        break;
-    }
+    const { response } = err as AxiosError;
+    const msg = (status?: number) => {
+      switch (status) {
+        case 404:
+          return "Không tìm thấy môn học";
+        default:
+          return "Có lỗi xảy ra";
+      }
+    };
     return {
-      status: axiosErr.response?.status,
+      status: response?.status,
       err: {
-        message,
-        detail: axiosErr.response?.data.message,
+        message: msg(response?.status),
+        detail: response?.data.message,
       },
     };
   }

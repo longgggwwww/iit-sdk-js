@@ -1,5 +1,5 @@
 import { Prisma } from "@prisma/client";
-declare const schoolPopulated: {
+declare const populated: {
     include: {
         grades: {
             include: {
@@ -8,5 +8,5 @@ declare const schoolPopulated: {
         };
     };
 };
-export type School = Prisma.SchoolGetPayload<typeof schoolPopulated>;
+export type School = Prisma.SchoolGetPayload<typeof populated>;
 export {};

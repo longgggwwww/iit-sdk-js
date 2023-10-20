@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { Prisma } from "@prisma/client";
 import { server } from "..";
-import { Subject } from "../../../../types";
+import { Response, Subject } from "../../../../types";
 
 export async function findMany(params: {
   skip?: number;
@@ -9,23 +9,24 @@ export async function findMany(params: {
   cursor?: Prisma.SubjectWhereUniqueInput;
   where?: Prisma.SubjectWhereInput;
   orderBy?: Prisma.SubjectOrderByWithRelationInput;
-}) {
+}): Promise<Response<Subject[]>> {
   try {
-    const url = `${server}/api/subjects`;
-    const response = await axios.get<Subject[]>(url, {
+    return await axios.get(`${server}/api/subjects`, {
       params,
     });
-    return {
-      status: response.status,
-      data: response.data,
-    };
   } catch (err) {
-    const axiosErr = err as AxiosError;
+    const { response } = err as AxiosError;
+    const msg = (status?: number) => {
+      switch (status) {
+        default:
+          return "Có lỗi xảy ra";
+      }
+    };
     return {
-      status: axiosErr.response?.status,
+      status: response?.status,
       err: {
-        message: "Lỗi không xác định",
-        detail: axiosErr.response?.data.message,
+        message: msg(response?.status),
+        detail: response?.data.message,
       },
     };
   }

@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 
-const schoolPopulated = Prisma.validator<Prisma.SchoolDefaultArgs>()({
+const populated = Prisma.validator<Prisma.SchoolDefaultArgs>()({
   include: {
     grades: {
       include: {
@@ -10,4 +10,4 @@ const schoolPopulated = Prisma.validator<Prisma.SchoolDefaultArgs>()({
   },
 });
 
-export type School = Prisma.SchoolGetPayload<typeof schoolPopulated>;
+export type School = Prisma.SchoolGetPayload<typeof populated>;

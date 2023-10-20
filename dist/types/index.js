@@ -14,5 +14,10 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./response"), exports);
 __exportStar(require("./school"), exports);
+__exportStar(require("./grade"), exports);
+__exportStar(require("./subject"), exports);
+__exportStar(require("./year"), exports);
+__exportStar(require("./class"), exports);
+__exportStar(require("./category"), exports);
+__exportStar(require("./topic"), exports);

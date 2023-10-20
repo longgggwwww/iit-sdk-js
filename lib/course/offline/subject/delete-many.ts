@@ -1,23 +1,25 @@
 import axios, { AxiosError } from "axios";
 import { server } from "..";
+import { Response } from "../../../../types";
 
-export async function deleteMany(ids: number[]) {
+export async function deleteMany(ids: number[]): Promise<Response<any>> {
   try {
-    const url = `${server}/api/subjects/batch`;
-    const res = await axios.delete(url, {
+    return await axios.delete(`${server}/api/subjects/batch`, {
       data: { ids },
     });
-    return {
-      status: res.status,
-      data: res.data,
-    };
   } catch (err) {
-    const axiosErr = err as AxiosError;
+    const { response } = <AxiosError>err;
+    const msg = (status?: number) => {
+      switch (status) {
+        default:
+          return "Có lỗi xảy ra";
+      }
+    };
     return {
-      status: axiosErr.response?.status,
+      status: response?.status,
       err: {
-        message: "Lỗi không xác định",
-        detail: axiosErr.response?.data.message,
+        message: msg(response?.status),
+        detail: response?.data.message,
       },
     };
   }

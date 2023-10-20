@@ -1,8 +1,8 @@
 import axios, { AxiosError } from "axios";
 import { server } from "..";
-import { Grade, Response } from "../../../../types";
+import { Response } from "../../../../types";
 
-export async function deleteMany(ids: number[]): Promise<Response<Grade>> {
+export async function deleteMany(ids: number[]): Promise<Response<any>> {
   try {
     return await axios.delete(`${server}/api/grades/batch`, {
       data: { ids },

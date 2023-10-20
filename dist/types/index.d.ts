@@ -1,2 +1,15 @@
-export * from "./response";
 export * from "./school";
+export * from "./grade";
+export * from "./subject";
+export * from "./year";
+export * from "./class";
+export * from "./category";
+export * from "./topic";
+export type Response<T> = {
+    status?: number;
+    data?: T;
+    err?: {
+        message: string;
+        detail?: string;
+    };
+};
