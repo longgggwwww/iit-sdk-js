@@ -1,24 +1,52 @@
-Hướng dẫn nè:
+## Giới thiệu
 
-git clone cái này về
-npm install
-npm run build
-npm link
+Đây là SDK cho phần mềm nội bộ xử dụng không cần internet của bộ học liệu điện tử IIT. Sử dụng cho [Local Server](https://github.com/lxdgc9/hldt.git)
 
-rồi sau đó vào project của mình
-npm link @iit/sdk
+## Cài đặt
 
-là xong, kiểm tra node_modules/@iit tồn tại là thành công
+```shell
+yarn add https://github.com/lxdgc9/iit-sdk-js.git
+```
 
-\*\* Hướng dẫn dùng code
+### Hướng dẫn sử dụng
 
-B1: kết nối kết sv local
-import sdk from '@iit/sdk"
+Dưới đây là hướng dẫn sử dụng từ reactjs
 
-sdk.course.offline.connect('http://...') // url có sv
+```typescript
+import sdk from "@iit/sdk/dist";
+import { School } from "@iit/sdk/dist/types";
+import * as React from "react";
 
-B2: sau đó gọi hàm (vd hàm tạo school)
-const { status, data, err } = await sdk.course.offline.school.create({
-code: 'h3k12j3',
-name: 'first school'
-})
+// Kết nối đến server local
+sdk.course.offline.connect("http://localhost:3000");
+
+export default function App() {
+  const [myState, setState] = React.useState<School[]>();
+
+  React.useEffect(() => {
+    (async () => {
+      const { data, err } = await sdk.course.offline.school.findMany({});
+      if (err) {
+        alert(err.message);
+        return;
+      }
+
+      if (data) {
+        setState(data);
+      }
+    })();
+  }, []);
+
+  const handleClick = async () => {
+    const { status, err, data } = await sdk.course.offline.school.create({
+      code: "code",
+      name: "THPT ABCXYZ",
+    });
+    if (err) {
+      alert(err.message);
+    }
+  };
+
+  return <button onClick={handleClick}>{JSON.stringify(myState)}</button>;
+}
+```
