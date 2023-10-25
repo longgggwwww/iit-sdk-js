@@ -7,7 +7,7 @@ const populated = Prisma.validator<Prisma.DocumentDefaultArgs>()({
         category: true,
         subject: {
           include: {
-            grade: true,
+            grades: true,
           },
         },
       },

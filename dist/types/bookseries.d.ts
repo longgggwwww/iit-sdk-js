@@ -8,7 +8,7 @@ declare const populated: {
                         category: true;
                         subject: {
                             include: {
-                                grade: true;
+                                grades: true;
                             };
                         };
                     };

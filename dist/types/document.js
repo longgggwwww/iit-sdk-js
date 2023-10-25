@@ -8,7 +8,7 @@ const populated = client_1.Prisma.validator()({
                 category: true,
                 subject: {
                     include: {
-                        grade: true,
+                        grades: true,
                     },
                 },
             },

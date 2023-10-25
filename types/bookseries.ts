@@ -9,7 +9,7 @@ const populated = Prisma.validator<Prisma.BookSeriesDefaultArgs>()({
             category: true,
             subject: {
               include: {
-                grade: true,
+                grades: true,
               },
             },
           },
