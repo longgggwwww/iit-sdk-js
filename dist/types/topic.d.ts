@@ -1,7 +1,12 @@
 import { Prisma } from "@prisma/client";
 declare const populated: {
     include: {
-        category: true;
+        categories: true;
+        grades: {
+            include: {
+                subjects: true;
+            };
+        };
         subject: {
             include: {
                 grades: true;

@@ -7,6 +7,7 @@ export * as category from "./category";
 export * as bookseries from "./bookseries";
 export * as topic from "./topic";
 export * as document from "./document";
+export * as student from "./student";
 
 export let server: string = "prod.db";
 

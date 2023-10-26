@@ -1,13 +1,13 @@
 import { Prisma } from "@prisma/client";
 declare const populated: {
     include: {
-        grades: true;
-        topics: {
+        class: {
             include: {
-                categories: true;
+                year: true;
             };
         };
+        transcripts: true;
     };
 };
-export type Subject = Prisma.SubjectGetPayload<typeof populated>;
+export type Student = Prisma.StudentGetPayload<typeof populated>;
 export {};

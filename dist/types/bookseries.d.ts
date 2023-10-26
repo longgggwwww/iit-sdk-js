@@ -5,7 +5,7 @@ declare const populated: {
             include: {
                 topic: {
                     include: {
-                        category: true;
+                        categories: true;
                         subject: {
                             include: {
                                 grades: true;

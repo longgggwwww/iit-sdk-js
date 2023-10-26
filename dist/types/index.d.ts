@@ -7,6 +7,7 @@ export * from "./category";
 export * from "./bookseries";
 export * from "./topic";
 export * from "./document";
+export * from "./student";
 export type Response<T> = {
     status?: number;
     data?: T;

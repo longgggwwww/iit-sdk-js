@@ -3,7 +3,12 @@ declare const populated: {
     include: {
         topic: {
             include: {
-                category: true;
+                grades: {
+                    include: {
+                        subjects: true;
+                    };
+                };
+                categories: true;
                 subject: {
                     include: {
                         grades: true;

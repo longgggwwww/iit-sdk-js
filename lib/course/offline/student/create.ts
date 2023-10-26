@@ -1,16 +1,17 @@
 import axios, { AxiosError } from "axios";
+import { Prisma } from "@prisma/client";
 import { server } from "..";
-import { Response, Year } from "../../../../types";
+import { Response, Student } from "../../../../types";
 
-export async function deleteOne(id: number): Promise<Response<Year>> {
+export async function create(
+  data: Prisma.StudentCreateInput
+): Promise<Response<Student>> {
   try {
-    return await axios.delete(`${server}/api/years/${id}`);
+    return await axios.post(`${server}/api/students`, data);
   } catch (err) {
     const { response } = <AxiosError>err;
     const msg = (status?: number) => {
       switch (status) {
-        case 404:
-          return "Không tìm thấy niên khóa";
         default:
           return "Có lỗi xảy ra";
       }
