@@ -4,7 +4,19 @@ const populated = Prisma.validator<Prisma.StudentDefaultArgs>()({
   include: {
     class: {
       include: {
-        year: true,
+        grade: {
+          include: {
+            school: true,
+            subjects: {
+              include: {
+                topics: true,
+              },
+            },
+          },
+        },
+        year: {
+          include: {},
+        },
       },
     },
     transcripts: true,
