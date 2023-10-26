@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
-import { Grade, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { server } from "..";
-import { Response } from "../../../../types";
+import { Grade, Response } from "../../../../types";
 
 export async function findMany(params: {
   skip?: number;
