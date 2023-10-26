@@ -1,5 +1,5 @@
-import { Grade, Prisma } from "@prisma/client";
-import { Response } from "../../../../types";
+import { Prisma } from "@prisma/client";
+import { Grade, Response } from "../../../../types";
 export declare function findMany(params: {
     skip?: number;
     take?: number;
