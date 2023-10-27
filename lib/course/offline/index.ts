@@ -8,6 +8,8 @@ export * as bookseries from "./bookseries";
 export * as topic from "./topic";
 export * as document from "./document";
 export * as student from "./student";
+export * as question from "./question";
+export * as exam from "./exam";
 
 export let server: string = "prod.db";
 

@@ -8,6 +8,8 @@ export * from "./bookseries";
 export * from "./topic";
 export * from "./document";
 export * from "./student";
+export * from "./question";
+export * from "./exam";
 
 export type Response<T> = {
   status?: number;
