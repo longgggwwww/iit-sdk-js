@@ -20,3 +20,5 @@ __exportStar(require("./find-uniq"), exports);
 __exportStar(require("./update"), exports);
 __exportStar(require("./delete"), exports);
 __exportStar(require("./delete-many"), exports);
+__exportStar(require("./upload"), exports);
+__exportStar(require("./serve"), exports);
