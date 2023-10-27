@@ -1,6 +1,11 @@
 import { Prisma } from "@prisma/client";
 declare const populated: {
     include: {
+        topic: {
+            include: {
+                subject: true;
+            };
+        };
         exam: {
             include: {
                 topic: {
