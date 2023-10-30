@@ -1,6 +1,7 @@
 import { Prisma } from "@prisma/client";
 declare const populated: {
     include: {
+        category: true;
         topic: {
             include: {
                 grades: {

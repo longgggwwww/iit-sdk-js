@@ -2,6 +2,7 @@ import { Prisma } from "@prisma/client";
 
 const populated = Prisma.validator<Prisma.DocumentDefaultArgs>()({
   include: {
+    category: true,
     topic: {
       include: {
         grades: {
