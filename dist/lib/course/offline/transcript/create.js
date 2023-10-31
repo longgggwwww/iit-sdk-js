@@ -3,19 +3,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.update = void 0;
+exports.create = void 0;
 const axios_1 = __importDefault(require("axios"));
 const __1 = require("..");
-async function update(id, data) {
+async function create(data) {
     try {
-        return await axios_1.default.patch(`${__1.server}/api/transcripts/${id}`, data);
+        return await axios_1.default.post(`${__1.server}/api/transcripts`, data);
     }
     catch (err) {
         const { response } = err;
         const msg = (status) => {
             switch (status) {
-                case 404:
-                    return "Không tìm thấy chủ đề";
                 default:
                     return "Có lỗi xảy ra";
             }
@@ -29,4 +27,4 @@ async function update(id, data) {
         };
     }
 }
-exports.update = update;
+exports.create = create;
