@@ -2,8 +2,9 @@ import axios, { AxiosError } from "axios";
 import { server } from "..";
 import { Response } from "../../../../types";
 
-export async function upload(data: FormData): Promise<Response<string>> {
+export async function upload(data: FormData): Promise<Response<any>> {
   try {
+    console.log("sdk test:", data);
     return await axios.post(`${server}/api/documents/upload`, data, {
       headers: {
         "Content-Type": "multipart/form-data",

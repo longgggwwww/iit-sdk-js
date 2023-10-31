@@ -8,6 +8,7 @@ const axios_1 = __importDefault(require("axios"));
 const __1 = require("..");
 async function upload(data) {
     try {
+        console.log("sdk test:", data);
         return await axios_1.default.post(`${__1.server}/api/documents/upload`, data, {
             headers: {
                 "Content-Type": "multipart/form-data",
