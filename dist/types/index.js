@@ -26,3 +26,4 @@ __exportStar(require("./document"), exports);
 __exportStar(require("./student"), exports);
 __exportStar(require("./question"), exports);
 __exportStar(require("./exam"), exports);
+__exportStar(require("./transcript"), exports);

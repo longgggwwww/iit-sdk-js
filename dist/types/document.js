@@ -14,6 +14,7 @@ const populated = client_1.Prisma.validator()({
                 categories: true,
                 subject: {
                     include: {
+                        topics: true,
                         grades: true,
                     },
                 },

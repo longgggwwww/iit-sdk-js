@@ -12,6 +12,7 @@ declare const populated: {
                 categories: true;
                 subject: {
                     include: {
+                        topics: true;
                         grades: true;
                     };
                 };

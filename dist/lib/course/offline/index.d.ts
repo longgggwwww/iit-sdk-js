@@ -10,5 +10,6 @@ export * as document from "./document";
 export * as student from "./student";
 export * as question from "./question";
 export * as exam from "./exam";
+export * as transcript from "./transcript";
 export declare let server: string;
 export declare function connect(url?: string): void;

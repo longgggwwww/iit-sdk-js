@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connect = exports.server = exports.exam = exports.question = exports.student = exports.document = exports.topic = exports.bookseries = exports.category = exports.class = exports.year = exports.subject = exports.grade = exports.school = void 0;
+exports.connect = exports.server = exports.transcript = exports.exam = exports.question = exports.student = exports.document = exports.topic = exports.bookseries = exports.category = exports.class = exports.year = exports.subject = exports.grade = exports.school = void 0;
 exports.school = __importStar(require("./school"));
 exports.grade = __importStar(require("./grade"));
 exports.subject = __importStar(require("./subject"));
@@ -36,6 +36,7 @@ exports.document = __importStar(require("./document"));
 exports.student = __importStar(require("./student"));
 exports.question = __importStar(require("./question"));
 exports.exam = __importStar(require("./exam"));
+exports.transcript = __importStar(require("./transcript"));
 exports.server = "prod.db";
 function connect(url) {
     if (url) {

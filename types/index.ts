@@ -10,6 +10,7 @@ export * from "./document";
 export * from "./student";
 export * from "./question";
 export * from "./exam";
+export * from "./transcript";
 
 export type Response<T> = {
   status?: number;

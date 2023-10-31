@@ -13,6 +13,7 @@ const populated = Prisma.validator<Prisma.DocumentDefaultArgs>()({
         categories: true,
         subject: {
           include: {
+            topics: true,
             grades: true,
           },
         },
