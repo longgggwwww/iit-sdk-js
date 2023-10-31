@@ -7,7 +7,15 @@ declare const populated: {
             };
         };
         year: true;
-        students: true;
+        students: {
+            include: {
+                class: {
+                    include: {
+                        grade: true;
+                    };
+                };
+            };
+        };
     };
 };
 export type Class = Prisma.ClassGetPayload<typeof populated>;

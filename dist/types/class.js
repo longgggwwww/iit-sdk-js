@@ -9,6 +9,14 @@ const populated = client_1.Prisma.validator()({
             },
         },
         year: true,
-        students: true,
+        students: {
+            include: {
+                class: {
+                    include: {
+                        grade: true,
+                    },
+                },
+            },
+        },
     },
 });

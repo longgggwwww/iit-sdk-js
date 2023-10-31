@@ -8,7 +8,15 @@ const populated = Prisma.validator<Prisma.ClassDefaultArgs>()({
       },
     },
     year: true,
-    students: true,
+    students: {
+      include: {
+        class: {
+          include: {
+            grade: true,
+          },
+        },
+      },
+    },
   },
 });
 
