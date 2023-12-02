@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@prisma/client": "5.4.2",
-    "axios": "^0.19.2"
+    "axios": "^1.6.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1",
