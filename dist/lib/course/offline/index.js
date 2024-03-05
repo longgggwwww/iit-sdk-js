@@ -23,20 +23,21 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connect = exports.server = exports.transcript = exports.exam = exports.question = exports.student = exports.document = exports.topic = exports.bookseries = exports.category = exports.class = exports.year = exports.subject = exports.grade = exports.school = void 0;
-exports.school = __importStar(require("./school"));
-exports.grade = __importStar(require("./grade"));
-exports.subject = __importStar(require("./subject"));
-exports.year = __importStar(require("./year"));
-exports.class = __importStar(require("./class"));
-exports.category = __importStar(require("./category"));
+exports.connect = exports.server = exports.year = exports.transcript = exports.topic = exports.subject = exports.student = exports.school = exports.question = exports.grade = exports.exam = exports.document = exports.class = exports.category = exports.calendar = exports.bookseries = void 0;
 exports.bookseries = __importStar(require("./bookseries"));
-exports.topic = __importStar(require("./topic"));
+exports.calendar = __importStar(require("./calendar"));
+exports.category = __importStar(require("./category"));
+exports.class = __importStar(require("./class"));
 exports.document = __importStar(require("./document"));
-exports.student = __importStar(require("./student"));
-exports.question = __importStar(require("./question"));
 exports.exam = __importStar(require("./exam"));
+exports.grade = __importStar(require("./grade"));
+exports.question = __importStar(require("./question"));
+exports.school = __importStar(require("./school"));
+exports.student = __importStar(require("./student"));
+exports.subject = __importStar(require("./subject"));
+exports.topic = __importStar(require("./topic"));
 exports.transcript = __importStar(require("./transcript"));
+exports.year = __importStar(require("./year"));
 exports.server = "prod.db";
 function connect(url) {
     if (url) {
